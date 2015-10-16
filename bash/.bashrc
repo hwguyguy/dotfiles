@@ -220,6 +220,7 @@ fi
 
 bind '"\eh":backward-kill-word'
 
+export EDITOR=vim
 export PATH="$HOME/bin:$PATH"
 
 if [ -f ~/.bashrc.override ]; then
