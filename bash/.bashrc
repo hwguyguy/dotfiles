@@ -137,6 +137,8 @@ if ! shopt -oq posix; then
 	fi
 fi
 
+shopt -s autocd
+
 if [[ $platform == 'darwin' ]]; then
 	complete -o default -o nospace -W "$(/usr/bin/env ruby -ne 'puts $_.split(/[,\s]+/)[1..-1].reject{|host| host.match(/\*|\?/)} if $_.match(/^\s*Host\s+/);' < $HOME/.ssh/config)" scp sftp ssh
 fi
@@ -179,10 +181,6 @@ alias ls='ls -aF --color=auto'
 alias ll='ls -l'
 
 alias grep='grep -n --color=auto'
-
-..() {
-	cd ..
-}
 
 -() {
 	cd -
