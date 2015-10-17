@@ -3,6 +3,7 @@
 setopt no_beep
 setopt auto_cd
 setopt prompt_subst
+setopt menu_complete
 #setopt complete_in_word
 #setopt always_to_end
 
