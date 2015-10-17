@@ -9,34 +9,20 @@ setopt prompt_subst
 autoload -U select-word-style
 autoload -U compinit
 autoload -Uz vcs_info
-#autoload -U colors && colors
 
 select-word-style bash
 
 compinit
 
-#zstyle ':vcs_info:*' stagedstr 'M'
-#zstyle ':vcs_info:*' unstagedstr 'M'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' actionformats ' %F{2}[%F{2}%b%F{3}|%F{1}%a%F{2}]%f '
-#zstyle ':vcs_info:*' formats ' %F{2}[%F{2}%b%F{2}] %F{2}%c%F{3}%u%f'
-zstyle ':vcs_info:*' formats ' %F{2}[%F{2}%b%F{2}]'
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 zstyle ':vcs_info:*' enable git
-#+vi-git-untracked() {
-#	if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true'  ]] && \
-#		[[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1  ]] ; then
-#	hook_com[unstaged]+='%F{1}??%f'
-#	fi
-#}
+zstyle ':vcs_info:git*' formats $' %{\e[01;32m%}(%b)'
+zstyle ':vcs_info:git*' actionformats ' %F{2}(%F{2}%b%F{3}|%F{1}%a%F{2})%f'
 
 precmd() {
 	vcs_info
 }
 
 PROMPT=$'%{\e[01;32m%}%n@%m%{\e[00m%}:%{\e[01;34m%}%~${vcs_info_msg_0_} %{\e[00m%}# '
-#PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m:%{$fg_no_bold[yellow]%}%~ %{$reset_color%}# "
-#RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
 
 # multiple JDKs
 
