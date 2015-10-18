@@ -13,7 +13,10 @@ autoload -Uz vcs_info
 
 select-word-style bash
 
+zmodload zsh/complist
 compinit
+
+zstyle ':completion:*' menu select
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats $' %{\e[01;32m%}(%b)'
@@ -90,6 +93,7 @@ export PATH=$HOME/bin:/usr/sbin:$PATH
 
 bindkey -e
 bindkey '\eh' backward-kill-word
+bindkey -M menuselect '^M' .accept-line
 
 if [ -f ~/.zshrc.override ]; then
 	. ~/.zshrc.override
