@@ -19,14 +19,14 @@ compinit
 zstyle ':completion:*' menu select
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats $' %{\e[01;32m%}(%b)'
+zstyle ':vcs_info:git*' formats $' %{\e[1;32m%}(%b)'
 zstyle ':vcs_info:git*' actionformats ' %F{2}(%F{2}%b%F{3}|%F{1}%a%F{2})%f'
 
 precmd() {
 	vcs_info
 }
 
-PROMPT=$'%{\e[01;32m%}%n@%m%{\e[00m%}:%{\e[01;34m%}%~${vcs_info_msg_0_} %{\e[00m%}# '
+PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_} %{\e[0m%}# '
 
 # multiple JDKs
 
@@ -94,6 +94,7 @@ export PATH=$HOME/bin:/usr/sbin:$PATH
 bindkey -e
 bindkey '\eh' backward-kill-word
 bindkey -M menuselect '^M' .accept-line
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 if [ -f ~/.zshrc.override ]; then
 	. ~/.zshrc.override
