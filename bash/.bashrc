@@ -152,6 +152,7 @@ jdk() {
 	local new_java_home="${prefix}${version}${suffix}"
 
 	if [ -z "${!new_java_home}" ]; then
+		echo $JAVA_VERSION
 		return
 	fi
 

@@ -1,5 +1,15 @@
 # ~/.zshrc
 
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+	platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+	platform='darwin'
+elif [[ "$unamestr" == 'MSYS'* ]]; then
+	platform='msys'
+fi
+
 setopt no_beep
 setopt auto_cd
 setopt prompt_subst
@@ -22,7 +32,7 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats $' %{\e[1;32m%}(%b)'
 zstyle ':vcs_info:git*' actionformats ' %F{2}(%F{2}%b%F{3}|%F{1}%a%F{2})%f'
 
-precmd() {
+function precmd() {
 	vcs_info
 }
 
@@ -37,6 +47,7 @@ function jdk() {
 	local new_java_home="${prefix}${version}${suffix}"
 
 	if [ -z "${(P)new_java_home}" ]; then
+		echo $JAVA_VERSION
 		return
 	fi
 
@@ -95,6 +106,12 @@ bindkey -e
 bindkey '\eh' backward-kill-word
 bindkey -M menuselect '^M' .accept-line
 bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+if [[ $platform == 'darwin' ]]; then
+	alias ls='ls -aFG'
+	alias grep='grep -n --color=auto'
+	alias egrep='egrep --color=auto'
+fi
 
 if [ -f ~/.zshrc.override ]; then
 	. ~/.zshrc.override
