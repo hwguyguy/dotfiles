@@ -38,8 +38,16 @@ function precmd() {
 
 PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_} %{\e[0m%}%% '
 
-# multiple JDKs
+# Auto change directory in Emacs term mode
+if [ -n "$INSIDE_EMACS" ]; then
+	function chpwd() {
+		print -P '\eAnSiTc %d'
+	}
+	print -P '\eAnSiTu %n'
+	print -P '\eAnSiTc %d'
+fi
 
+# Switch jdk
 function jdk() {
 	local prefix="JAVA_"
 	local suffix="_HOME"
