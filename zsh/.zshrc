@@ -101,8 +101,6 @@ alias eek='emacsclient -e "(kill-emacs)"'
 alias gvim='gvim 2>/dev/null'
 alias gvimr='gvim 2>/dev/null --remote-silent'
 
-alias tmux='TERM=xterm-256color tmux'
-
 alias rs='rails s -b 0.0.0.0 -p 3000'
 
 alias ds='python manage.py runserver 0.0.0.0:8000'

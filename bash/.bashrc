@@ -200,8 +200,6 @@ alias eek='emacsclient -e "(kill-emacs)"'
 alias gvim='gvim 2>/dev/null'
 alias gvimr='gvim 2>/dev/null --remote-silent'
 
-alias tmux='TERM=xterm-256color tmux'
-
 # print current directory in tree view
 alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 
