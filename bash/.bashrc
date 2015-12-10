@@ -203,9 +203,7 @@ alias gvimr='gvim 2>/dev/null --remote-silent'
 # print current directory in tree view
 alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 
-alias rs='rails s -b 0.0.0.0 -p 3000'
-
-alias ds='python manage.py runserver 0.0.0.0:8000'
+alias rs='rails s -b 0.0.0.0'
 
 if [[ $platform == 'darwin' ]]; then
 	alias ls='ls -aFG'
