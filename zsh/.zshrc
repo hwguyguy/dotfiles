@@ -103,6 +103,12 @@ alias gvimr='gvim 2>/dev/null --remote-silent'
 
 alias rs='rails s -b 0.0.0.0'
 
+if [ -n "$TMUX" ]; then
+	alias vim='TERM=screen-256color vim'
+	alias vi='TERM=screen-256color vim'
+	alias htop='TERM=screen-256color htop'
+fi
+
 export EDITOR=vim
 export PATH=$HOME/bin:/usr/sbin:$PATH
 
