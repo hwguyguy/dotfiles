@@ -4,6 +4,5 @@
 [core]
 	whitespace = trailing-space
 	autocrlf = false
-	fileMode = false
 [include]
 	path = ~/.gitconfig.override
