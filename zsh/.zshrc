@@ -17,6 +17,12 @@ setopt menu_complete
 #setopt complete_in_word
 #setopt always_to_end
 
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+export HISTSIZE=200 # Lines of history in memory
+export SAVEHIST=1000 # Lines of history in history file
+export HISTFILE=$HOME/.zsh_history
+
 autoload -U select-word-style
 autoload -U compinit
 autoload -Uz vcs_info
