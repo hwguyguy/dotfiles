@@ -16,12 +16,20 @@ setopt prompt_subst
 setopt menu_complete
 #setopt complete_in_word
 #setopt always_to_end
+setopt magic_equal_subst
 
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-export HISTSIZE=200 # Lines of history in memory
-export SAVEHIST=1000 # Lines of history in history file
-export HISTFILE=$HOME/.zsh_history
+# Enable history
+#setopt APPEND_HISTORY
+#setopt SHARE_HISTORY
+#export HISTSIZE=200 # Lines of history in memory
+#export SAVEHIST=1000 # Lines of history in history file
+#export HISTFILE=$HOME/.zsh_history
+
+# Disable history
+#unsetopt APPEND_HISTORY
+#unsetopt SHARE_HISTORY
+#unset SAVEHIST
+#unset HISTFILE
 
 autoload -U select-word-style
 autoload -U compinit
