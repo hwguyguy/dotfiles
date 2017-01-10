@@ -189,7 +189,7 @@ alias grep='grep -n --color=auto'
 
 alias gt='git status'
 alias gd='git diff'
-alias gl='git log --graph --oneline'
+alias gl='git log --graph --oneline --decorate'
 alias ga='git add'
 alias gr='cd "$(git rev-parse --show-toplevel)"'
 
