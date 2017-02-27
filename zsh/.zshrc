@@ -48,6 +48,7 @@ zstyle ':vcs_info:git*' actionformats ' %F{2}(%F{2}%b%F{3}|%F{1}%a%F{2})%f'
 
 function precmd() {
 	vcs_info
+	print -Pn "\033]0;%n@%m:%~\007"
 }
 
 PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_} %{\e[0m%}%% '
