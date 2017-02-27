@@ -11,6 +11,7 @@ elif [[ "$unamestr" == 'MSYS'* ]]; then
 fi
 
 setopt no_beep
+setopt noflowcontrol
 setopt auto_cd
 setopt prompt_subst
 setopt menu_complete
