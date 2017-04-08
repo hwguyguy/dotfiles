@@ -10,6 +10,8 @@ elif [[ "$unamestr" == 'MSYS'* ]]; then
 	platform='msys'
 fi
 
+NEWLINE=$'\n'
+
 setopt no_beep
 setopt noflowcontrol
 setopt auto_cd
@@ -52,7 +54,7 @@ function precmd() {
 	print -Pn "\033]0;%n@%m:%~\007"
 }
 
-PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_} %{\e[0m%}%% '
+PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_}${NEWLINE}%{\e[0m%}%% '
 
 # Auto change directory in Emacs term mode
 if [ -n "$INSIDE_EMACS" ]; then
