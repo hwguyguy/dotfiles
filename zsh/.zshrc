@@ -135,6 +135,10 @@ bindkey '\eh' backward-kill-word
 bindkey -M menuselect '^M' .accept-line
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 if [[ $platform == 'darwin' ]]; then
 	alias ls='ls -aFG'
 	alias grep='grep -n --color=auto'
