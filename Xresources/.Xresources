@@ -48,5 +48,5 @@ URxvt.scrollTtyKeypress: True
 URxvt.secondaryScroll: True
 URxvt.saveLines: 8000
 URxvt.termName: xterm-256color
-
 URxvt.geometry: 136x40
+URxvt.perl-ext-common: selection-to-clipboard
