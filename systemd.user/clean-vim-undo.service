@@ -1,0 +1,6 @@
+[Unit]
+Description=Clean VIM undofiles
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/find %h/.vim/.undo -type f -mtime +30 -delete

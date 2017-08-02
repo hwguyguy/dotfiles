@@ -1,0 +1,8 @@
+[Unit]
+Description=Clean VIM undofiles
+
+[Timer]
+OnBootSec=10s
+
+[Install]
+WantedBy=timers.target
