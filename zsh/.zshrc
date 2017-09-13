@@ -103,6 +103,7 @@ function jdk() {
 
 alias ls='ls -aF --color=auto'
 alias ll='ls -l'
+alias sl=ls
 
 alias grep='grep -n --color=auto'
 
