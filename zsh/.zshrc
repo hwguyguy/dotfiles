@@ -54,7 +54,11 @@ function precmd() {
 	print -Pn "\033]0;%n@%m:%~\007"
 }
 
-PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_}${NEWLINE}%{\e[0m%}%% '
+if [[ $EUID == 0 ]]; then
+	PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_} %{\e[0m%}%% '
+else
+	PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_}${NEWLINE}%{\e[0m%}%% '
+fi
 
 # Auto change directory in Emacs term mode
 if [ -n "$INSIDE_EMACS" ]; then
