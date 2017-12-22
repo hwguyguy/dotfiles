@@ -2,15 +2,13 @@
 
 platform='unknown'
 unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
+if [[ $unamestr == 'Linux' ]]; then
 	platform='linux'
-elif [[ "$unamestr" == 'Darwin' ]]; then
+elif [[ $unamestr == 'Darwin' ]]; then
 	platform='darwin'
-elif [[ "$unamestr" == 'MSYS'* ]]; then
+elif [[ $unamestr == 'MSYS'* ]]; then
 	platform='msys'
 fi
-
-NEWLINE=$'\n'
 
 setopt no_beep
 setopt noflowcontrol
@@ -36,7 +34,6 @@ setopt magic_equal_subst
 
 autoload -U select-word-style
 autoload -U compinit
-autoload -Uz vcs_info
 
 select-word-style bash
 
@@ -45,19 +42,22 @@ compinit
 
 zstyle ':completion:*' menu select
 
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats $' %{\e[1;32m%}(%b)'
-zstyle ':vcs_info:git*' actionformats ' %F{2}(%F{2}%b%F{3}|%F{1}%a%F{2})%f'
-
-function precmd() {
-	vcs_info
-	print -Pn "\033]0;%n@%m:%~\007"
-}
+prompt_newline=$'\n%{\r%}'
 
 if [[ $EUID == 0 ]]; then
-	PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_} %{\e[0m%}%% '
+	PS1=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~ %{\e[0m%}%# '
 else
-	PROMPT=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_}${NEWLINE}%{\e[0m%}%% '
+	autoload -Uz vcs_info
+	zstyle ':vcs_info:*' enable git
+	zstyle ':vcs_info:git*' formats $' %{\e[1;32m%}(%b)'
+	zstyle ':vcs_info:git*' actionformats ' %F{2}(%F{2}%b%F{3}|%F{1}%a%F{2})%f'
+
+	precmd() {
+		vcs_info
+		#print -Pn "\033]0;%n@%m:%~\007"
+	}
+
+	PS1=$'%{\e[1;32m%}%n@%m%{\e[0m%}:%{\e[1;34m%}%~${vcs_info_msg_0_}$prompt_newline%{\e[0m%}%# '
 fi
 
 # Auto change directory in Emacs term mode
