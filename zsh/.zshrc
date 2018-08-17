@@ -79,9 +79,12 @@ fi
 alias ls='ls -aF --color=auto'
 alias ll='ls -l'
 alias sl=ls
+alias l=ls
+alias s=ls
 
 alias grep='grep -n --color=auto'
 
+alias g='git'
 alias gt='git status'
 alias gd='git diff'
 alias gl='git log --graph --oneline --decorate'
