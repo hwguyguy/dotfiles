@@ -108,7 +108,7 @@ alias gvimr='gvim 2>/dev/null --remote-silent'
 alias rs='rails s -b 0.0.0.0'
 rake() { if [ -f bin/rake  ]; then bin/rake "$@"; else bundle exec rake "$@"; fi }
 
-if [ -n "$TMUX" ]; then
+if [[ -n $TMUX ]]; then
 	alias vim='TERM=screen-256color vim'
 	alias vi='TERM=screen-256color vim'
 	alias htop='TERM=screen-256color htop'
