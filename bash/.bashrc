@@ -6,11 +6,11 @@ esac
 
 platform='unknown'
 unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
+if [[ $unamestr == 'Linux' ]]; then
 	platform='linux'
-elif [[ "$unamestr" == 'Darwin' ]]; then
+elif [[ $unamestr == 'Darwin' ]]; then
 	platform='darwin'
-elif [[ "$unamestr" == 'MSYS'* ]]; then
+elif [[ $unamestr == 'MSYS'* ]]; then
 	platform='msys'
 fi
 
@@ -37,28 +37,29 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-if [[ $platform == 'darwin' ]]; then
-	complete -o default -o nospace -W "$(/usr/bin/env ruby -ne 'puts $_.split(/[,\s]+/)[1..-1].reject{|host| host.match(/\*|\?/)} if $_.match(/^\s*Host\s+/);' < $HOME/.ssh/config)" scp sftp ssh
-fi
-
+# Git prompt and completion on Linux and MSYS
 if [[ $platform == 'linux' || $platform == 'msys' ]]; then
 	if [ -f /usr/share/git/completion/git-prompt.sh ]; then
 		source /usr/share/git/completion/git-prompt.sh
-		git_prompt=yes
 	fi
 	if [ -f /usr/share/git/completion/git-completion.bash ]; then
 		source /usr/share/git/completion/git-completion.bash
-   fi
+	fi
 fi
 
+# Git prompt and completion on Mac
 if [[ $platform == 'darwin' ]]; then
 	if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh ]; then
 		source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
-		git_prompt=yes
 	fi
 	if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ]; then
 		source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 	fi
+fi
+
+# Completion for ~/.ssh/config on Mac
+if [[ $platform == 'darwin' ]]; then
+	complete -o default -o nospace -W "$(/usr/bin/env ruby -ne 'puts $_.split(/[,\s]+/)[1..-1].reject{|host| host.match(/\*|\?/)} if $_.match(/^\s*Host\s+/);' < $HOME/.ssh/config)" scp sftp ssh
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -95,9 +96,7 @@ else
 	PS1="$PS1\u@\h:\w"
 fi
 
-if [ "$git_prompt" = yes ]; then
-	unset git_prompt
-
+if [ "$(type -t __git_ps1)" = 'function' ]; then
 	if [ "$color_prompt" = yes ]; then
 		PS1="$PS1\[\033[01;32m\]\$(__git_ps1)"
 	else
@@ -133,11 +132,6 @@ if [ -x /usr/bin/dircolors ]; then
 	#alias fgrep='fgrep --color=auto'
 	#alias egrep='egrep --color=auto'
 fi
-
-# some more ls aliases
-#alias ll='ls -alF'
-#alias la='ls -A'
-#alias l='ls -CF'
 
 alias ls='ls -aF --color=auto'
 alias ll='ls -l'
