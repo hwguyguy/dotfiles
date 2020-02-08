@@ -76,6 +76,20 @@ fi
 	cd -
 }
 
+git() {
+	if [[ $1 == 'reset' && $2 == '--hard' ]]; then
+		echo 'WARNING: If you really want to hard reset the repository, use "command git reset --hard"'
+	else
+		command git "$@"
+	fi
+}
+
+gr() {
+	dir=$(git rev-parse --show-toplevel)
+	cd $dir
+	echo $dir
+}
+
 alias ls='ls -aF --color=auto'
 alias ll='ls -l'
 alias sl=ls
@@ -89,16 +103,8 @@ alias gt='git status'
 alias gd='git diff'
 alias gl='git log --graph --oneline --decorate'
 alias ga='git add'
-alias gr='cd "$(git rev-parse --show-toplevel)"'
 alias gb='git branch'
 alias gch='git checkout'
-git() {
-	if [[ $1 == 'reset' && $2 == '--hard' ]]; then
-		echo 'WARNING: If you really want to hard reset the repository, use "command git reset --hard"'
-	else
-		command git "$@"
-	fi
-}
 
 alias ed='emacs --daemon'
 alias et='emacsclient -t'
